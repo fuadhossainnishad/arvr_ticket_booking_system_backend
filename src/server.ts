@@ -3,7 +3,7 @@ import {db} from './config/dbconfig';
 import app from './app';
 
 
-
+const port=process.env.PORT
 
 // Create a MySQL connection pool
 // const pool = mysql.createPool(dbconnfig);
@@ -31,7 +31,6 @@ app.get('/students', async (req:Request, res:Response) => {
 });
 
 // Start server and test database connection
-const port = 5000;
 app.listen(port,async () => {
   console.log(`Server is listening on http://localhost:${port}`);
   await testDatabaseConnection(); 

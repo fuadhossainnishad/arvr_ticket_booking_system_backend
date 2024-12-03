@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const dbconfig_1 = require("./config/dbconfig");
 const app_1 = __importDefault(require("./app"));
+const port = process.env.PORT;
 // Create a MySQL connection pool
 // const pool = mysql.createPool(dbconnfig);
 // Test MySQL connection
@@ -39,7 +40,6 @@ app_1.default.get('/students', (req, res) => __awaiter(void 0, void 0, void 0, f
     }
 }));
 // Start server and test database connection
-const port = 5000;
 app_1.default.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
     console.log(`Server is listening on http://localhost:${port}`);
     yield testDatabaseConnection();
