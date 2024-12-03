@@ -8,16 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllEventsController = void 0;
-const dbconfig_1 = __importDefault(require("../config/dbconfig"));
+const dbconfig_1 = require("../config/dbconfig");
+const eventsQueries_1 = require("../database/postgresql/queries/eventsQueries");
 const getAllEventsController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const allEventquery = `SELECT * FROM events`;
     try {
-        const [allEventsResponse] = yield dbconfig_1.default.query(allEventquery);
+        const results = yield (0, dbconfig_1.db)(eventsQueries_1.allEventQuery);
+        const allEventsResponse = results.rows;
         if (!allEventsResponse) {
             return res.status(404).json({ message: "No events found." });
         }

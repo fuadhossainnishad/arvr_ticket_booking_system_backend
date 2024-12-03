@@ -1,4 +1,4 @@
-import { createTableLib } from "../../lib/createTableLib"
+// import { createTableLib } from "../../lib/createTableLib"
 
 const createUserTableQuery=`CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -11,4 +11,4 @@ const createUserTableQuery=`CREATE TABLE IF NOT EXISTS users (
 );
 `
 
-createTableLib(createUserTableQuery)
+// createTableLib(createUserTableQuery)

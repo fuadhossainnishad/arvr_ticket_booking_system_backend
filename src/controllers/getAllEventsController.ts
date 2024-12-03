@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
-import db from "../config/dbconfig";
+import {db} from "../config/dbconfig";
 import { Event } from "../interface/eventInterface";
+import { allEventQuery } from "../database/postgresql/queries/eventsQueries";
+import { Events } from "pg";
 export const getAllEventsController = async (req: Request, res: Response) => {
-  const allEventquery = `SELECT * FROM events`;
   try {
-    const [allEventsResponse] = await db.query<Event[]>(allEventquery);
+    const results = await db(allEventQuery);
+    const allEventsResponse: Event[] = results.rows;
     if (!allEventsResponse) {
       return res.status(404).json({ message: "No events found." });
     }

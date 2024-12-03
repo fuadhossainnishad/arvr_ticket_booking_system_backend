@@ -8,20 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const dbconfig_1 = __importDefault(require("../config/dbconfig"));
+const dbconfig_1 = require("../config/dbconfig");
+const eventsQueries_1 = require("../database/postgresql/queries/eventsQueries");
 const getEventController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        const query = `SELECT * FROM events WHERE id = ?`;
-        const [rows] = yield dbconfig_1.default.query(query, [id]);
-        if (rows.length === 0) {
+        const result = yield (0, dbconfig_1.db)(eventsQueries_1.getSingleEventQuery, [id]);
+        if (result.rows.length === 0) {
             return res.status(404).json({ message: "Event not found." });
         }
-        const event = rows[0];
+        const event = result.rows[0];
         const fileBaseURL = `${req.protocol}://${req.get("host")}`; // Base URL for uploaded files
         event.coverPhoto = event.coverPhoto ? `${fileBaseURL}/${event.coverPhoto}` : "";
         res.json(event);

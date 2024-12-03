@@ -1,17 +1,17 @@
-import db from "../config/dbconfig";
+import {db} from "../config/dbconfig";
 import { userQuery } from "../database/query/userQueries";
 import { User } from "../interface/userInterface";
 import bcrypt from "bcrypt";
 
 export const getSingleUserId = async (email: string, password: string) => {
-  const [dbresponse] = await db.query<User[]>(userQuery.getSingleUserIdQuery, [
+  const dbresponse = await db(userQuery.getSingleUserIdQuery, [
     email,
   ]);
 
-  if (!dbresponse) {
+  if (!dbresponse.rows[0]) {
     return null;
   }
-  const user = dbresponse[0];
+  const user = dbresponse.rows[0];
   const checkPassword = await bcrypt.compare(password, user.hashPassword);
   if (!checkPassword) {
     return null;
@@ -20,19 +20,19 @@ export const getSingleUserId = async (email: string, password: string) => {
 };
 
 export const getSingleUserInfo = async (id: string) => {
-  const [dbresponse] = await db.query<User[]>(
+  const dbresponse = await db(
     userQuery.getSingleUserInfoQuery,
     [id]
   );
-  if (!dbresponse) {
+  if (!dbresponse.rows[0]) {
     return null;
   }
-  return dbresponse[0];
+  return dbresponse.rows[0];
 };
 
 export const getAllUsers = async () => {
-  const [dbresponse] = await db.query<User[]>(userQuery.getAllUserQuery);
-  return dbresponse;
+  const dbresponse= await db(userQuery.getAllUserQuery);
+  return dbresponse.rows;
 };
 
 export const postSingleUser = async (user: {
@@ -43,11 +43,11 @@ export const postSingleUser = async (user: {
 }) => {
   const { fullName, email, mobileNumber, password } = user;
   const hashPassword = await bcrypt.hash(password, 10);
-  const [dbresponse] = await db.query<User[]>(userQuery.insertSingleUserQuery, [
+  const dbresponse= await db(userQuery.insertSingleUserQuery, [
     fullName,
     email,
     mobileNumber,
     hashPassword,
   ]);
-  return dbresponse;
+  return dbresponse.rows[0];
 };

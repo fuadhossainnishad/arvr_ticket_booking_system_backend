@@ -8,12 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const dbconfig_1 = __importDefault(require("../config/dbconfig"));
+const dbconfig_1 = require("../config/dbconfig");
+// import { ResultSetHeader } from "mysql2";
 const fileName_1 = require("../filehandle/fileName");
+const eventsQueries_1 = require("../database/postgresql/queries/eventsQueries");
 const createEventController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { title, description, totalSeats, ticketPrice, eventDate } = req.body;
     if (!req.file) {
@@ -21,11 +20,18 @@ const createEventController = (req, res) => __awaiter(void 0, void 0, void 0, fu
     }
     const coverPhoto = yield (0, fileName_1.fileName)(req);
     try {
-        const [result] = yield dbconfig_1.default.query(`INSERT INTO events (title, description, totalSeats, ticketPrice, eventDate, coverPhoto) VALUES (?, ?, ?, ?, ?, ?)`, [title, description, totalSeats, ticketPrice, eventDate, coverPhoto]);
+        const result = yield (0, dbconfig_1.db)(eventsQueries_1.insertEventQuery, [
+            title,
+            description,
+            totalSeats,
+            ticketPrice,
+            eventDate,
+            coverPhoto,
+        ]);
         res.status(200).json({
             status: "success",
             message: "Event created successfully",
-            eventId: result.insertId,
+            eventId: result.rows[0].id,
         });
     }
     catch (error) {

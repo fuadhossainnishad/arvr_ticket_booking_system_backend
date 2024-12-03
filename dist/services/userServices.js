@@ -13,17 +13,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postSingleUser = exports.getAllUsers = exports.getSingleUserInfo = exports.getSingleUserId = void 0;
-const dbconfig_1 = __importDefault(require("../config/dbconfig"));
+const dbconfig_1 = require("../config/dbconfig");
 const userQueries_1 = require("../database/query/userQueries");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const getSingleUserId = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
-    const [dbresponse] = yield dbconfig_1.default.query(userQueries_1.userQuery.getSingleUserIdQuery, [
+    const dbresponse = yield (0, dbconfig_1.db)(userQueries_1.userQuery.getSingleUserIdQuery, [
         email,
     ]);
-    if (!dbresponse) {
+    if (!dbresponse.rows[0]) {
         return null;
     }
-    const user = dbresponse[0];
+    const user = dbresponse.rows[0];
     const checkPassword = yield bcrypt_1.default.compare(password, user.hashPassword);
     if (!checkPassword) {
         return null;
@@ -32,27 +32,27 @@ const getSingleUserId = (email, password) => __awaiter(void 0, void 0, void 0, f
 });
 exports.getSingleUserId = getSingleUserId;
 const getSingleUserInfo = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const [dbresponse] = yield dbconfig_1.default.query(userQueries_1.userQuery.getSingleUserInfoQuery, [id]);
-    if (!dbresponse) {
+    const dbresponse = yield (0, dbconfig_1.db)(userQueries_1.userQuery.getSingleUserInfoQuery, [id]);
+    if (!dbresponse.rows[0]) {
         return null;
     }
-    return dbresponse[0];
+    return dbresponse.rows[0];
 });
 exports.getSingleUserInfo = getSingleUserInfo;
 const getAllUsers = () => __awaiter(void 0, void 0, void 0, function* () {
-    const [dbresponse] = yield dbconfig_1.default.query(userQueries_1.userQuery.getAllUserQuery);
-    return dbresponse;
+    const dbresponse = yield (0, dbconfig_1.db)(userQueries_1.userQuery.getAllUserQuery);
+    return dbresponse.rows;
 });
 exports.getAllUsers = getAllUsers;
 const postSingleUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     const { fullName, email, mobileNumber, password } = user;
     const hashPassword = yield bcrypt_1.default.hash(password, 10);
-    const [dbresponse] = yield dbconfig_1.default.query(userQueries_1.userQuery.insertSingleUserQuery, [
+    const dbresponse = yield (0, dbconfig_1.db)(userQueries_1.userQuery.insertSingleUserQuery, [
         fullName,
         email,
         mobileNumber,
         hashPassword,
     ]);
-    return dbresponse;
+    return dbresponse.rows[0];
 });
 exports.postSingleUser = postSingleUser;

@@ -1,6 +1,6 @@
-import { createTableLib } from "../../lib/createTableLib";
+// import { createTableLib } from "../../lib/createTableLib";
 
-const createAdminTableQuery = `
+export const createAdminTableQuery = `
 CREATE TABLE admins (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -9,4 +9,4 @@ CREATE TABLE admins (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
   );`;
 
-createTableLib(createAdminTableQuery);
+// createTableLib(createAdminTableQuery);

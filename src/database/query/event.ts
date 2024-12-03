@@ -1,36 +1,37 @@
 export const insertEventQuery = `
-    INSERT INTO events (title, description, totalSeats, ticketPrice, eventDate, coverPhoto)
-    VALUES (?, ?, ?, ?, ?, ?);
+    INSERT INTO events (title, description, total_seats, ticket_price, event_date, cover_photo)
+    VALUES ($1, $2, $3, $4, $5, $6);
 `;
 
 export const updateSingleEventQuery = `
     UPDATE events
     SET 
-        title = ?,
-        description = ?,
-        totalSeats = ?,
-        ticketPrice = ?,
-        eventDate = ?,
-        coverPhoto = ?,
-        updatedAt = NOW()
-    WHERE id = ?;
+        title = $1,
+        description = $2,
+        total_seats = $3,
+        ticket_price = $4,
+        event_date = $5,
+        cover_photo = $6,
+        updated_at = CURRENT_TIMESTAMP
+    WHERE id = $7;
 `;
+
 export const deleteSingleEventQuery = `
- DELETE FROM events
- WHERE id = ?
- LIMIT 1;
+    DELETE FROM events
+    WHERE id = $1;
 `;
 
 export const getAllEventsQuery = `
-SELECT * FROM events;
+    SELECT * FROM events;
 `;
+
 export const getSingleEventQuery = `
- SELECT * FROM events
- WHERE id = ?;
+    SELECT * FROM events
+    WHERE id = $1;
 `;
 
 export const getUpcomingEventsQuery = `
- SELECT * FROM events
- WHERE eventDate > NOW()
- ORDER BY eventDate ASC;
+    SELECT * FROM events
+    WHERE event_date > CURRENT_TIMESTAMP
+    ORDER BY event_date ASC;
 `;

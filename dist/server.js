@@ -12,15 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const dbconfig_1 = __importDefault(require("./config/dbconfig"));
+const dbconfig_1 = require("./config/dbconfig");
 const app_1 = __importDefault(require("./app"));
 // Create a MySQL connection pool
 // const pool = mysql.createPool(dbconnfig);
 // Test MySQL connection
 const testDatabaseConnection = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const [rows] = yield dbconfig_1.default.query('SELECT * FROM events');
-        console.log('Data from database:', rows);
+        const rows = yield (0, dbconfig_1.db)('SELECT * FROM events');
+        console.log('Data from database:', rows.rows);
     }
     catch (err) {
         console.error('Database connection failed:', err);
@@ -30,8 +30,8 @@ const testDatabaseConnection = () => __awaiter(void 0, void 0, void 0, function*
 app_1.default.get('/students', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Query the database
-        const [results] = yield dbconfig_1.default.query('SELECT * FROM student');
-        res.json(results); // Send the data as a JSON response
+        const results = yield (0, dbconfig_1.db)('SELECT * FROM student');
+        res.json(results.rows); // Send the data as a JSON response
     }
     catch (err) {
         console.log(err);

@@ -13,26 +13,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAdminInfo = exports.getAdminId = void 0;
-const dbconfig_1 = __importDefault(require("../config/dbconfig"));
+const dbconfig_1 = require("../config/dbconfig");
+// import { Admin } from "../interface/adminInterface";
 const adminQuery_1 = require("../database/query/adminQuery");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const getAdminId = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
     const hashPassword = yield bcrypt_1.default.hash(password, 10);
-    const [adminId] = yield dbconfig_1.default.query(adminQuery_1.getAdminIdQuery, [
+    const adminId = yield (0, dbconfig_1.db)(adminQuery_1.getAdminIdQuery, [
         email,
         hashPassword,
     ]);
-    if (!adminId) {
+    if (!adminId.rows[0]) {
         throw new Error("Invalid email or password.");
     }
-    return adminId;
+    return adminId.rows[0];
 });
 exports.getAdminId = getAdminId;
 const getAdminInfo = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const [adminInfo] = yield dbconfig_1.default.query(adminQuery_1.getAdminInfoQuery, [id]);
-    if (!adminInfo) {
+    const adminInfo = yield (0, dbconfig_1.db)(adminQuery_1.getAdminInfoQuery, [id]);
+    if (!adminInfo.rows[0]) {
         throw new Error("Admin not found.");
     }
-    return adminInfo;
+    return adminInfo.rows[0];
 });
 exports.getAdminInfo = getAdminInfo;

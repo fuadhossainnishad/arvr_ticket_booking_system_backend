@@ -1,6 +1,6 @@
-import { createTableLib } from "../../lib/createTableLib"
+// import { createTableLib } from "../../lib/createTableLib"
 
-const createUserBookingTableQuery=`CREATE TABLE user_bookings (
+export const createUserBookingTableQuery=`CREATE TABLE user_bookings (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   event_id INT NOT NULL,
@@ -11,4 +11,4 @@ const createUserBookingTableQuery=`CREATE TABLE user_bookings (
   FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE
 );
 `
-createTableLib(createUserBookingTableQuery)
+// createTableLib(createUserBookingTableQuery)

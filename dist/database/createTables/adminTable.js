@@ -1,7 +1,8 @@
 "use strict";
+// import { createTableLib } from "../../lib/createTableLib";
 Object.defineProperty(exports, "__esModule", { value: true });
-const createTableLib_1 = require("../../lib/createTableLib");
-const createAdminTableQuery = `
+exports.createAdminTableQuery = void 0;
+exports.createAdminTableQuery = `
 CREATE TABLE admins (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -9,4 +10,4 @@ CREATE TABLE admins (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
   );`;
-(0, createTableLib_1.createTableLib)(createAdminTableQuery);
+// createTableLib(createAdminTableQuery);
