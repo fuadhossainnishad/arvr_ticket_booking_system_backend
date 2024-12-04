@@ -4,9 +4,9 @@ import { User } from "../interface/userInterface";
 import bcrypt from "bcrypt";
 
 export const getSingleUserId = async (email: string, password: string) => {
-  const dbresponse = await db(userQuery.getSingleUserIdQuery, [
+  const dbresponse = (await db(userQuery.getSingleUserIdQuery, [
     email,
-  ]);
+  ]))!;
 
   if (!dbresponse.rows[0]) {
     return null;
@@ -20,10 +20,10 @@ export const getSingleUserId = async (email: string, password: string) => {
 };
 
 export const getSingleUserInfo = async (id: string) => {
-  const dbresponse = await db(
+  const dbresponse = (await db(
     userQuery.getSingleUserInfoQuery,
     [id]
-  );
+  ))!;
   if (!dbresponse.rows[0]) {
     return null;
   }
@@ -31,7 +31,7 @@ export const getSingleUserInfo = async (id: string) => {
 };
 
 export const getAllUsers = async () => {
-  const dbresponse= await db(userQuery.getAllUserQuery);
+  const dbresponse= (await db(userQuery.getAllUserQuery))!;
   return dbresponse.rows;
 };
 
@@ -43,11 +43,11 @@ export const postSingleUser = async (user: {
 }) => {
   const { fullName, email, mobileNumber, password } = user;
   const hashPassword = await bcrypt.hash(password, 10);
-  const dbresponse= await db(userQuery.insertSingleUserQuery, [
+  const dbresponse= (await db(userQuery.insertSingleUserQuery, [
     fullName,
     email,
     mobileNumber,
     hashPassword,
-  ]);
+  ]))!;
   return dbresponse.rows[0];
 };

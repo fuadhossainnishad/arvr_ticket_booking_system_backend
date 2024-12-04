@@ -11,8 +11,8 @@ const port=process.env.PORT
 // Test MySQL connection
 const testDatabaseConnection = async () => {
   try {
-    const rows = await db('SELECT * FROM events');
-    console.log('Data from database:', rows.rows);
+    const result = (await db('SELECT * FROM events'))!;
+    console.log('Data from database:', result.rows);
   } catch (err) {
     console.error('Database connection failed:', err);
   }
@@ -22,7 +22,7 @@ const testDatabaseConnection = async () => {
 app.get('/students', async (req:Request, res:Response) => {
   try {
     // Query the database
-    const results = await db('SELECT * FROM student');
+    const results = (await db('SELECT * FROM student'))!;
     res.json(results.rows); // Send the data as a JSON response
   } catch (err) {
     console.log(err);

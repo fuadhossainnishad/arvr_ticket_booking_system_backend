@@ -5,7 +5,7 @@ import { allEventQuery } from "../database/postgresql/queries/eventsQueries";
 import { Events } from "pg";
 export const getAllEventsController = async (req: Request, res: Response) => {
   try {
-    const results = await db(allEventQuery);
+    const results = (await db(allEventQuery))!;
     const allEventsResponse: Event[] = results.rows;
     if (!allEventsResponse) {
       return res.status(404).json({ message: "No events found." });

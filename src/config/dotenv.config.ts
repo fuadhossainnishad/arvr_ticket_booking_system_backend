@@ -1,6 +1,6 @@
-import dotenv from 'dotenv'
+import dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
 
 // export const dbconnfig ={
 //     host: process.env.HOST,
@@ -9,12 +9,12 @@ dotenv.config()
 //     database: process.env.DATABASE,
 // }
 
-export const dbconnfig ={
-    host: process.env.PGHOST,
-    user: process.env.PGUSER,
-    password: process.env.PGPASSWORD,
-    database: process.env.PGDATABASE,
-    url:process.env.PSURL,
-    port: Number(process.env.PGPORT)
-
-}
+export const dbconnfig = {
+  host: process.env.PGHOST,
+  user: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  database: process.env.PGDATABASE,
+  url: process.env.PGURL,
+  port: Number(process.env.PGPORT),
+};
+console.log(dbconnfig);

@@ -8,10 +8,10 @@ import bcrypt from "bcrypt";
 
 export const getAdminId = async (email: string, password: string) => {
   const hashPassword = await bcrypt.hash(password, 10);
-  const adminId= await db(getAdminIdQuery, [
+  const adminId= (await db(getAdminIdQuery, [
     email,
     hashPassword,
-  ]);
+  ]))!;
   if (!adminId.rows[0]) {
     throw new Error("Invalid email or password.");
   }
@@ -19,7 +19,7 @@ export const getAdminId = async (email: string, password: string) => {
 };
 
 export const getAdminInfo = async (id: string) => {
-  const adminInfo = await db(getAdminInfoQuery, [id]);
+  const adminInfo = (await db(getAdminInfoQuery, [id]))!;
   if (!adminInfo.rows[0]) {
     throw new Error("Admin not found.");
   }

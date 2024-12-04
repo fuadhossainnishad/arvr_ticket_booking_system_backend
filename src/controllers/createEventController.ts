@@ -14,14 +14,14 @@ const createEventController = async (req: Request, res: Response) => {
   const coverPhoto = await fileName(req);
 
   try {
-    const result= await db(insertEventQuery, [
+    const result= (await db(insertEventQuery, [
       title,
       description,
       totalSeats,
       ticketPrice,
       eventDate,
       coverPhoto,
-    ]);
+    ]))!;
 
     res.status(200).json({
       status: "success",
