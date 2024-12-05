@@ -17,6 +17,7 @@ exports.dbconnfig = {
     user: process.env.PGUSER,
     password: process.env.PGPASSWORD,
     database: process.env.PGDATABASE,
-    url: process.env.PSURL,
-    port: Number(process.env.PGPORT)
+    url: process.env.PGURL,
+    port: Number(process.env.PGPORT),
 };
+console.log(exports.dbconnfig);

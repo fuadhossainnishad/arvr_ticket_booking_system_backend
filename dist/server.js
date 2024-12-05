@@ -20,8 +20,8 @@ const port = process.env.PORT;
 // Test MySQL connection
 const testDatabaseConnection = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const rows = yield (0, dbconfig_1.db)('SELECT * FROM events');
-        console.log('Data from database:', rows.rows);
+        const result = (yield (0, dbconfig_1.db)('SELECT * FROM events'));
+        console.log('Data from database:', result.rows);
     }
     catch (err) {
         console.error('Database connection failed:', err);
@@ -31,7 +31,7 @@ const testDatabaseConnection = () => __awaiter(void 0, void 0, void 0, function*
 app_1.default.get('/students', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Query the database
-        const results = yield (0, dbconfig_1.db)('SELECT * FROM student');
+        const results = (yield (0, dbconfig_1.db)('SELECT * FROM student'));
         res.json(results.rows); // Send the data as a JSON response
     }
     catch (err) {

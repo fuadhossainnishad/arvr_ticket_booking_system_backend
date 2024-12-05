@@ -19,10 +19,10 @@ const adminQuery_1 = require("../database/query/adminQuery");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const getAdminId = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
     const hashPassword = yield bcrypt_1.default.hash(password, 10);
-    const adminId = yield (0, dbconfig_1.db)(adminQuery_1.getAdminIdQuery, [
+    const adminId = (yield (0, dbconfig_1.db)(adminQuery_1.getAdminIdQuery, [
         email,
         hashPassword,
-    ]);
+    ]));
     if (!adminId.rows[0]) {
         throw new Error("Invalid email or password.");
     }
@@ -30,7 +30,7 @@ const getAdminId = (email, password) => __awaiter(void 0, void 0, void 0, functi
 });
 exports.getAdminId = getAdminId;
 const getAdminInfo = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const adminInfo = yield (0, dbconfig_1.db)(adminQuery_1.getAdminInfoQuery, [id]);
+    const adminInfo = (yield (0, dbconfig_1.db)(adminQuery_1.getAdminInfoQuery, [id]));
     if (!adminInfo.rows[0]) {
         throw new Error("Admin not found.");
     }

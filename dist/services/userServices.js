@@ -17,9 +17,9 @@ const dbconfig_1 = require("../config/dbconfig");
 const userQueries_1 = require("../database/query/userQueries");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const getSingleUserId = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
-    const dbresponse = yield (0, dbconfig_1.db)(userQueries_1.userQuery.getSingleUserIdQuery, [
+    const dbresponse = (yield (0, dbconfig_1.db)(userQueries_1.userQuery.getSingleUserIdQuery, [
         email,
-    ]);
+    ]));
     if (!dbresponse.rows[0]) {
         return null;
     }
@@ -32,7 +32,7 @@ const getSingleUserId = (email, password) => __awaiter(void 0, void 0, void 0, f
 });
 exports.getSingleUserId = getSingleUserId;
 const getSingleUserInfo = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const dbresponse = yield (0, dbconfig_1.db)(userQueries_1.userQuery.getSingleUserInfoQuery, [id]);
+    const dbresponse = (yield (0, dbconfig_1.db)(userQueries_1.userQuery.getSingleUserInfoQuery, [id]));
     if (!dbresponse.rows[0]) {
         return null;
     }
@@ -40,19 +40,19 @@ const getSingleUserInfo = (id) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.getSingleUserInfo = getSingleUserInfo;
 const getAllUsers = () => __awaiter(void 0, void 0, void 0, function* () {
-    const dbresponse = yield (0, dbconfig_1.db)(userQueries_1.userQuery.getAllUserQuery);
+    const dbresponse = (yield (0, dbconfig_1.db)(userQueries_1.userQuery.getAllUserQuery));
     return dbresponse.rows;
 });
 exports.getAllUsers = getAllUsers;
 const postSingleUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     const { fullName, email, mobileNumber, password } = user;
     const hashPassword = yield bcrypt_1.default.hash(password, 10);
-    const dbresponse = yield (0, dbconfig_1.db)(userQueries_1.userQuery.insertSingleUserQuery, [
+    const dbresponse = (yield (0, dbconfig_1.db)(userQueries_1.userQuery.insertSingleUserQuery, [
         fullName,
         email,
         mobileNumber,
         hashPassword,
-    ]);
+    ]));
     return dbresponse.rows[0];
 });
 exports.postSingleUser = postSingleUser;

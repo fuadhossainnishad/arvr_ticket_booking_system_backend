@@ -20,14 +20,14 @@ const createEventController = (req, res) => __awaiter(void 0, void 0, void 0, fu
     }
     const coverPhoto = yield (0, fileName_1.fileName)(req);
     try {
-        const result = yield (0, dbconfig_1.db)(eventsQueries_1.insertEventQuery, [
+        const result = (yield (0, dbconfig_1.db)(eventsQueries_1.insertEventQuery, [
             title,
             description,
             totalSeats,
             ticketPrice,
             eventDate,
             coverPhoto,
-        ]);
+        ]));
         res.status(200).json({
             status: "success",
             message: "Event created successfully",

@@ -20,6 +20,9 @@ const db = (text, params) => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield client.query(text, params);
         return result;
     }
+    catch (err) {
+        console.error(err);
+    }
     finally {
         client.release();
     }

@@ -14,7 +14,7 @@ const eventsQueries_1 = require("../database/postgresql/queries/eventsQueries");
 const getEventController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        const result = yield (0, dbconfig_1.db)(eventsQueries_1.getSingleEventQuery, [id]);
+        const result = (yield (0, dbconfig_1.db)(eventsQueries_1.getSingleEventQuery, [id]));
         if (result.rows.length === 0) {
             return res.status(404).json({ message: "Event not found." });
         }

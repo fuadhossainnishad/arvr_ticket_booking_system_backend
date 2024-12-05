@@ -18,3 +18,9 @@ export const dbconnfig = {
   port: Number(process.env.PGPORT),
 };
 console.log(dbconnfig);
+
+export const cloudinaryConfig={
+  cloud_name: process.env.CLDNNAME,
+  api_key: process.env.CLDNAPIKEY,
+  api_secret: process.env.CLDNAPISECRET,
+}
