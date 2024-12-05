@@ -29,7 +29,7 @@ exports.getSingleUserInfoController = (0, catchAsync_1.default)((req, res) => __
     if (!userInfo) {
         return res.status(404).json({ message: "User not found" });
     }
-    return res.status(200).json({ message: "" });
+    return res.status(200).json({ message: "User found", userInfo });
 }));
 exports.getAllUsersController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const allUsers = yield userServices_1.getAllUsers;
@@ -47,8 +47,8 @@ exports.postSingleUserController = (0, catchAsync_1.default)((req, res) => __awa
         password,
     });
     if (!postUser) {
-        return res.status(404).json({ message: "User not signedUp" });
+        return res.status(404).json({ message: "User not registered" });
     }
     return res.status(200).json({ message: "User signedUp successfully" });
-    console.log(postUser);
+    // console.log(postUser)
 }));

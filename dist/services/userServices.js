@@ -14,7 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postSingleUser = exports.getAllUsers = exports.getSingleUserInfo = exports.getSingleUserId = void 0;
 const dbconfig_1 = require("../config/dbconfig");
-const userQueries_1 = require("../database/query/userQueries");
+const userQueries_1 = require("../database/postgresql/queries/userQueries");
+// import { User } from "../interface/userInterface";
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const getSingleUserId = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
     const dbresponse = (yield (0, dbconfig_1.db)(userQueries_1.userQuery.getSingleUserIdQuery, [

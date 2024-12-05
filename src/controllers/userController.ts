@@ -25,7 +25,7 @@ export const getSingleUserInfoController = catchAsync(
     if (!userInfo) {
       return res.status(404).json({ message: "User not found" });
     }
-    return res.status(200).json({ message: "" });
+    return res.status(200).json({ message: "User found",userInfo });
   }
 );
 
@@ -50,9 +50,9 @@ export const postSingleUserController = catchAsync(
     });
 
     if (!postUser) {
-      return res.status(404).json({ message: "User not signedUp" });
+      return res.status(404).json({ message: "User not registered" });
     }
     return res.status(200).json({ message: "User signedUp successfully" });
-    console.log(postUser)
+    // console.log(postUser)
   }
 );

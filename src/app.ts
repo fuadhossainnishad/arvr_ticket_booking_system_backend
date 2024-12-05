@@ -9,6 +9,7 @@ import getAllEventRoute from "./routes/getAllEventRoute";
 import getUserRoute from "./routes/userRoute";
 import getAdminRoute from "./routes/adminRoute";
 import { uploadsDir } from "./filehandle/uploadsDir";
+import { frontendConfig } from "./config/dotenv.config";
 
 // Load environment variables
 dotenv.config();
@@ -16,14 +17,13 @@ dotenv.config();
 // Initialize Express app
 const app = express();
 
+// {
+//   origin:frontendConfig.frontend,
+//   methods: '*' ,
+//   credentials: true,
+// }
 // Middleware
-app.use(
-  cors({
-    origin: "https://arvr-ticket-booking-system.vercel.app",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    credentials: true,
-  })
-);
+app.use(cors());
 app.use(express.json()); // Use built-in Express middleware
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(uploadsDir));

@@ -1,6 +1,6 @@
 import {db} from "../config/dbconfig";
-import { userQuery } from "../database/query/userQueries";
-import { User } from "../interface/userInterface";
+import { userQuery } from "../database/postgresql/queries/userQueries";
+// import { User } from "../interface/userInterface";
 import bcrypt from "bcrypt";
 
 export const getSingleUserId = async (email: string, password: string) => {

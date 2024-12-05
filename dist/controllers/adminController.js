@@ -21,7 +21,7 @@ exports.getAdminIdController = (0, catchAsync_1.default)((req, res) => __awaiter
     if (!adminId) {
         return res.status(404).json({ message: "Admin not found" });
     }
-    return res.status(200).json({ message: "Admin SignIn Successfully", adminId });
+    return res.status(200).json({ message: "Admin SignIn Successfully" });
 }));
 exports.getAdminInfoController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { adminId } = req.params;

@@ -8,7 +8,7 @@ export const getAdminIdController= catchAsync(async (req:Request,res:Response)=>
     if(!adminId){
         return res.status(404).json({message:"Admin not found"})
     }
-    return res.status(200).json({message:"Admin SignIn Successfully",adminId})
+    return res.status(200).json({message:"Admin SignIn Successfully"})
 })
 
 export const getAdminInfoController= catchAsync(async(req:Request,res:Response)=>{

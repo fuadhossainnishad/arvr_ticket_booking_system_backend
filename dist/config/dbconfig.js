@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sequelize = exports.db = void 0;
-const sequelize_1 = require("sequelize");
+exports.db = void 0;
+// import { Sequelize } from "sequelize";
 const dotenv_config_1 = require("./dotenv.config");
 const pg_1 = require("pg");
-const pool = new pg_1.Pool(dotenv_config_1.dbconnfig);
+const pool = new pg_1.Pool(dotenv_config_1.dbconfig);
 const db = (text, params) => __awaiter(void 0, void 0, void 0, function* () {
     const client = yield pool.connect();
     try {
@@ -21,7 +21,8 @@ const db = (text, params) => __awaiter(void 0, void 0, void 0, function* () {
         return result;
     }
     catch (err) {
-        console.error(err);
+        console.error("Database query error:", err);
+        throw err;
     }
     finally {
         client.release();
@@ -29,12 +30,17 @@ const db = (text, params) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.db = db;
 //for orm support
-exports.sequelize = new sequelize_1.Sequelize(dotenv_config_1.dbconnfig.database, dotenv_config_1.dbconnfig.user, dotenv_config_1.dbconnfig.password, {
-    host: dotenv_config_1.dbconnfig.host,
-    port: dotenv_config_1.dbconnfig.port,
-    dialect: "postgres",
-    logging: console.log,
-});
+// export const sequelize = new Sequelize(
+//   dbconfig.database!,
+//   dbconfig.user!,
+//   dbconfig.password,
+//   {
+//     host: dbconfig.host,
+//     port: dbconfig.port,
+//     dialect: "postgres",
+//     logging: console.log,
+//   }
+// );
 // const sequelize=new Sequelize(dbconnfig.url, username)
 // import mysql from 'mysql2/promise'
 // import { dbconnfig } from './dotenv.config'

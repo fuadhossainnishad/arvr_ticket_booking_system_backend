@@ -1,8 +1,8 @@
-import { Sequelize } from "sequelize";
-import { dbconnfig } from "./dotenv.config";
+// import { Sequelize } from "sequelize";
+import { dbconfig } from "./dotenv.config";
 import { Pool } from "pg";
 
-const pool = new Pool(dbconnfig);
+const pool = new Pool(dbconfig);
 
 export const db = async (text: string, params?: any[]) => {
   const client = await pool.connect();
@@ -10,7 +10,8 @@ export const db = async (text: string, params?: any[]) => {
     const result = await client.query(text, params);
     return result;
   } catch (err) {
-    console.error(err);
+    console.error("Database query error:", err);
+    throw err;
   } finally {
     client.release();
   }
@@ -18,17 +19,17 @@ export const db = async (text: string, params?: any[]) => {
 
 //for orm support
 
-export const sequelize = new Sequelize(
-  dbconnfig.database!,
-  dbconnfig.user!,
-  dbconnfig.password,
-  {
-    host: dbconnfig.host,
-    port: dbconnfig.port,
-    dialect: "postgres",
-    logging: console.log,
-  }
-);
+// export const sequelize = new Sequelize(
+//   dbconfig.database!,
+//   dbconfig.user!,
+//   dbconfig.password,
+//   {
+//     host: dbconfig.host,
+//     port: dbconfig.port,
+//     dialect: "postgres",
+//     logging: console.log,
+//   }
+// );
 
 // const sequelize=new Sequelize(dbconnfig.url, username)
 
