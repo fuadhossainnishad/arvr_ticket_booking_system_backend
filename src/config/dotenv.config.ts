@@ -18,6 +18,7 @@ export const dbconnfig = {
   port: Number(process.env.PGPORT),
 };
 console.log(dbconnfig);
+console.log('Environment Variables:', process.env);
 
 export const cloudinaryConfig={
   cloud_name: process.env.CLDNNAME,
