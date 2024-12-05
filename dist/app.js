@@ -17,7 +17,7 @@ dotenv_1.default.config();
 // Initialize Express app
 const app = (0, express_1.default)();
 // Middleware
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({ origin: 'https://arvr-ticket-booking-system.vercel.app/' }));
 app.use(express_1.default.json()); // Use built-in Express middleware
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/uploads", express_1.default.static(uploadsDir_1.uploadsDir));

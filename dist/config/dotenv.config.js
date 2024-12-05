@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dbconnfig = void 0;
+exports.cloudinaryConfig = exports.dbconnfig = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 // export const dbconnfig ={
@@ -21,3 +21,8 @@ exports.dbconnfig = {
     port: Number(process.env.PGPORT),
 };
 console.log(exports.dbconnfig);
+exports.cloudinaryConfig = {
+    cloud_name: process.env.CLDNNAME,
+    api_key: process.env.CLDNAPIKEY,
+    api_secret: process.env.CLDNAPISECRET,
+};
