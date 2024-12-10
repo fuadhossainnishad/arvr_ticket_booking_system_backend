@@ -24,7 +24,13 @@ export const getEventByIdValidationSchema = z.object({
   }),
 });
 
-export const deleteEventValidationSchema = z.object({
+// export const deleteEventValidationSchema=z.object({
+//   body:z.object({
+    
+//   })
+// })
+
+export const updateEventValidationSchema = z.object({
   title: z
     .string()
     .min(1, "Title is required.")

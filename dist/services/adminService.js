@@ -9,17 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAdminInfo = exports.getAdminId = void 0;
+exports.adminDashboardInfo = exports.getAdminInfo = exports.getAdminId = void 0;
 const dbconfig_1 = require("../config/dbconfig");
-// import { Admin } from "../interface/adminInterface";
+// import {admin } from "../interface/adminInterface";
 const adminQueries_1 = require("../database/postgresql/queries/adminQueries");
-const getAdminId = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
+const getAdminId = (email) => __awaiter(void 0, void 0, void 0, function* () {
     // const hashPassword = await bcrypt.hash(password, 10);
-    const adminId = (yield (0, dbconfig_1.db)(adminQueries_1.getAdminIdQuery, [email, password]));
+    const adminId = (yield (0, dbconfig_1.db)(adminQueries_1.getAdminIdQuery, [email]));
     if (!adminId.rows[0]) {
         throw new Error("Invalid email or password.");
     }
     return adminId.rows[0];
+    console.log("getAdminId", adminId.rows);
 });
 exports.getAdminId = getAdminId;
 const getAdminInfo = (id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -28,5 +29,15 @@ const getAdminInfo = (id) => __awaiter(void 0, void 0, void 0, function* () {
         throw new Error("Admin not found.");
     }
     return adminInfo.rows[0];
+    console.log("getAdminInfo", adminInfo.rows);
 });
 exports.getAdminInfo = getAdminInfo;
+const adminDashboardInfo = () => __awaiter(void 0, void 0, void 0, function* () {
+    const dbresponse = yield (0, dbconfig_1.db)(adminQueries_1.adminDashboardQuery);
+    const dashboard = dbresponse.rows;
+    if (!dashboard) {
+        return null;
+    }
+    return dashboard;
+});
+exports.adminDashboardInfo = adminDashboardInfo;

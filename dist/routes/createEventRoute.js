@@ -9,4 +9,4 @@ const createEvent_1 = __importDefault(require("../filehandle/createEvent"));
 const createEventController_1 = __importDefault(require("../controllers/createEventController"));
 const createEventRoute = express_1.default.Router();
 exports.createEventRoute = createEventRoute;
-createEventRoute.post('/events', createEvent_1.default.single("coverPhoto"), createEventController_1.default);
+createEventRoute.post('/event', createEvent_1.default.single("coverPhoto"), createEventController_1.default);

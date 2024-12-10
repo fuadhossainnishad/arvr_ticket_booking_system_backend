@@ -4,10 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const validateRequest_1 = __importDefault(require("../middlewares/validateRequest"));
-const userValidation_1 = require("../validation/userValidation");
 const adminController_1 = require("../controllers/adminController");
-const getAdminRoute = express_1.default.Router();
-getAdminRoute.post('/signin/admin', (0, validateRequest_1.default)(userValidation_1.UserValiation.userSignInValidationSchema), adminController_1.getAdminIdController);
-getAdminRoute.get('/admin/:adminId', adminController_1.getAdminInfoController);
-exports.default = getAdminRoute;
+const adminRoute = express_1.default.Router();
+// getAdminRoute.post('/signin/admin',validateRequest(UserValiation.userSignInValidationSchema),getAdminIdController)
+adminRoute.post("/signin/", adminController_1.getAdminIdController);
+adminRoute.get("/:adminId/", adminController_1.getAdminInfoController);
+adminRoute.get("/dashboard", adminController_1.getAdminDashboardController);
+exports.default = adminRoute;

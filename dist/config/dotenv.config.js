@@ -17,10 +17,13 @@ exports.dbconfig = {
     user: process.env.PGUSER,
     password: process.env.PGPASSWORD,
     database: process.env.PGDATABASE,
-    url: process.env.PGURL,
-    port: Number(process.env.PGPORT),
+    // url: process.env.PGURL,
+    port: Number(process.env.PGPORT) || 5432,
+    ssl: {
+        rejectUnauthorized: false, // Required for Render's SSL
+    },
 };
-console.log(exports.dbconfig);
+// console.log(dbconfig);
 // console.log('Environment Variables:', process.env);
 exports.cloudinaryConfig = {
     cloud_name: process.env.CLDNNAME,

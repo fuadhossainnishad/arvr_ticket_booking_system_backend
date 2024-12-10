@@ -10,14 +10,17 @@ dotenv.config();
 // }
 
 export const dbconfig = {
-  host: process.env.PGHOST,
+  host: process.env.PGHOST!,
   user: process.env.PGUSER,
   password: process.env.PGPASSWORD,
   database: process.env.PGDATABASE,
-  url: process.env.PGURL,
-  port: Number(process.env.PGPORT),
+  // url: process.env.PGURL,
+  port: Number(process.env.PGPORT) || 5432,
+  ssl: {
+    rejectUnauthorized: false, // Required for Render's SSL
+  },
 };
-console.log(dbconfig);
+// console.log(dbconfig);
 // console.log('Environment Variables:', process.env);
 
 export const cloudinaryConfig={

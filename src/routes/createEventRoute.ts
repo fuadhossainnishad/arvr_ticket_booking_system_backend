@@ -4,6 +4,6 @@ import createEventController from '../controllers/createEventController';
 
   const createEventRoute=express.Router()
 
-createEventRoute.post('/events',upload.single("coverPhoto"),createEventController)
+createEventRoute.post('/event',upload.single("coverPhoto"),createEventController)
 
 export {createEventRoute}

@@ -3,25 +3,29 @@ import validateRequest from "../middlewares/validateRequest";
 import {
   getAllUsersController,
   getSingleUserIdController,
+  getSingleUserInfoController,
   postSingleUserController,
+  userbookingController,
 } from "../controllers/userController";
 import { UserValiation } from "../validation/userValidation";
 
-const getUserRoute = express.Router();
-getUserRoute.post(
-  "/signup/user",
+const userRoute = express.Router();
+userRoute.post(
+  "/signup/",
   validateRequest(UserValiation.createUserSignUpValidationSchema),
   postSingleUserController
 );
 
-getUserRoute.post(
-  "/signin/user",
+userRoute.post(
+  "/signin/",
   validateRequest(UserValiation.userSignInValidationSchema),
   getSingleUserIdController
 );
 
-getUserRoute.get("/user", getAllUsersController);
+userRoute.get("/", getAllUsersController);
 
-getUserRoute.get("/user/:{userId}", getSingleUserIdController);
+userRoute.post("/:userId", getSingleUserInfoController);
 
-export default getUserRoute;
+userRoute.get('/bookings/:userId',userbookingController);
+
+export default userRoute;

@@ -3,6 +3,7 @@ import {
   getAllUsers,
   getSingleUserId,
   getSingleUserInfo,
+  getUserBookings,
   postSingleUser,
 } from "../services/userServices";
 import catchAsync from "../utils/catchAsync";
@@ -10,6 +11,8 @@ import catchAsync from "../utils/catchAsync";
 export const getSingleUserIdController = catchAsync(
   async (req: Request, res: Response) => {
     const { email, password } = req.body;
+    console.log(req.body);
+    
     const userId = await getSingleUserId(email, password);
     if (!userId) {
       return res.status(401).json({ message: "Invalid email or password" });
@@ -25,13 +28,13 @@ export const getSingleUserInfoController = catchAsync(
     if (!userInfo) {
       return res.status(404).json({ message: "User not found" });
     }
-    return res.status(200).json({ message: "User found",userInfo });
+    return res.status(200).json({ message: "User found", userInfo });
   }
 );
 
 export const getAllUsersController = catchAsync(
   async (req: Request, res: Response) => {
-    const allUsers = await getAllUsers;
+    const allUsers = await getAllUsers();
     if (!allUsers) {
       return null;
     }
@@ -41,11 +44,12 @@ export const getAllUsersController = catchAsync(
 
 export const postSingleUserController = catchAsync(
   async (req: Request, res: Response) => {
-    const { fullName, email, mobileNumber, password } = req.body;
+    const { fullname, email, mobilenumber, password } = req.body;
+    console.log(req.body);
     const postUser = await postSingleUser({
-      fullName,
+      fullname,
       email,
-      mobileNumber,
+      mobilenumber,
       password,
     });
 
@@ -54,5 +58,18 @@ export const postSingleUserController = catchAsync(
     }
     return res.status(200).json({ message: "User signedUp successfully" });
     // console.log(postUser)
+  }
+);
+
+export const userbookingController = catchAsync(
+  async (req: Request, res: Response) => {
+    const { user_id } = req.params;
+    const userbooking = await getUserBookings(user_id);
+    if (!userbooking) {
+      return res.status(404).json({ message: "User Bookings not found" });
+    }
+    return res
+      .status(200)
+      .json({ message: "User Bookings found successfully", userbooking });
   }
 );

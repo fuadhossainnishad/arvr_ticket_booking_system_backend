@@ -3,6 +3,6 @@ import { getAllEventsController } from '../controllers/getAllEventsController';
 
 const getAllEventRoute = express.Router()
 
-getAllEventRoute.get('/events',getAllEventsController)
+getAllEventRoute.get('/',getAllEventsController)
 
 export default getAllEventRoute

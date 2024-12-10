@@ -2,19 +2,19 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 // import bodyParser from "body-parser";
-import path from "path";
+// import path from "path";
 import { createEventRoute } from "./routes/createEventRoute";
 import getEventRoute from "./routes/getEventRoute";
 import getAllEventRoute from "./routes/getAllEventRoute";
-import getUserRoute from "./routes/userRoute";
-import getAdminRoute from "./routes/adminRoute";
+import userRoute from "./routes/userRoute";
+import adminRoute from "./routes/adminRoute";
 import { uploadsDir } from "./filehandle/uploadsDir";
-import { frontendConfig } from "./config/dotenv.config";
+import bookingRoute from "./routes/bookingRoute";
+import eventRoute from "./routes/eventsRoute";
+// import { frontendConfig } from "./config/dotenv.config";
 
-// Load environment variables
 dotenv.config();
 
-// Initialize Express app
 const app = express();
 
 // {
@@ -22,18 +22,18 @@ const app = express();
 //   methods: '*' ,
 //   credentials: true,
 // }
-// Middleware
+
 app.use(cors());
 app.use(express.json()); // Use built-in Express middleware
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(uploadsDir));
 
-// Routes
-app.use("/api/", getAllEventRoute);
-app.use("/api/", createEventRoute);
-app.use("/api/", getEventRoute);
-app.use("/api/", getUserRoute);
-app.use("/api/", getAdminRoute);
+// app.use("/api/events/", getAllEventRoute);
+// app.use("/api/", createEventRoute);
 
-// Export app
+app.use("/api/events/", eventRoute);
+app.use("/api/user/", userRoute);
+app.use("/api/admin/", adminRoute);
+app.use("/api/bookings/", bookingRoute);
+
 export default app;

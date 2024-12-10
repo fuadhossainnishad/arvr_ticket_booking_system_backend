@@ -4,7 +4,7 @@ exports.UserValiation = void 0;
 const zod_1 = require("zod");
 const createUserSignUpValidationSchema = zod_1.z.object({
     body: zod_1.z.object({
-        fullName: zod_1.z.string({
+        fullname: zod_1.z.string({
             invalid_type_error: "Full Name must be string",
         }),
         email: zod_1.z
@@ -12,7 +12,7 @@ const createUserSignUpValidationSchema = zod_1.z.object({
             invalid_type_error: "Email must be valid email address",
         })
             .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Invalid Email Address"),
-        mobileNumber: zod_1.z
+        mobilenumber: zod_1.z
             .string({
             invalid_type_error: "Mobile Number must be valid number",
         })

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postSingleUserController = exports.getAllUsersController = exports.getSingleUserInfoController = exports.getSingleUserIdController = void 0;
+exports.userbookingController = exports.postSingleUserController = exports.getAllUsersController = exports.getSingleUserInfoController = exports.getSingleUserIdController = void 0;
 const userServices_1 = require("../services/userServices");
 const catchAsync_1 = __importDefault(require("../utils/catchAsync"));
 exports.getSingleUserIdController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -32,18 +32,18 @@ exports.getSingleUserInfoController = (0, catchAsync_1.default)((req, res) => __
     return res.status(200).json({ message: "User found", userInfo });
 }));
 exports.getAllUsersController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const allUsers = yield userServices_1.getAllUsers;
+    const allUsers = yield (0, userServices_1.getAllUsers)();
     if (!allUsers) {
         return null;
     }
     return res.status(200).json({ message: "All Users", allUsers });
 }));
 exports.postSingleUserController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { fullName, email, mobileNumber, password } = req.body;
+    const { fullName, email, mobilenumber, password } = req.body;
     const postUser = yield (0, userServices_1.postSingleUser)({
         fullName,
         email,
-        mobileNumber,
+        mobilenumber,
         password,
     });
     if (!postUser) {
@@ -51,4 +51,14 @@ exports.postSingleUserController = (0, catchAsync_1.default)((req, res) => __awa
     }
     return res.status(200).json({ message: "User signedUp successfully" });
     // console.log(postUser)
+}));
+exports.userbookingController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { user_id } = req.params;
+    const userbooking = yield (0, userServices_1.getUserBookings)(user_id);
+    if (!userbooking) {
+        return res.status(404).json({ message: "User Bookings not found" });
+    }
+    return res
+        .status(200)
+        .json({ message: "User Bookings found successfully", userbooking });
 }));
