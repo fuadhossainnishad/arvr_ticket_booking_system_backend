@@ -57,9 +57,9 @@ export const updateEvent = async (
   eventId: string,
   title: string,
   description: string,
-  totalSeats: number,
-  ticketPrice: number,
-  eventDate: any,
+  totalSeats: string,
+  ticketPrice: string,
+  eventDate: string,
   coverPhoto: string
 ) => {
   const id = Number(eventId);
@@ -67,8 +67,8 @@ export const updateEvent = async (
   const response = await db(updateSingleEventQuery, [
     title,
     description,
-    totalSeats,
-    ticketPrice,
+    Number(totalSeats),
+    Number(ticketPrice),
     eventDate,
     coverPhoto,
     id,

@@ -11,6 +11,6 @@ const adminRoute = express.Router();
 
 // getAdminRoute.post('/signin/admin',validateRequest(UserValiation.userSignInValidationSchema),getAdminIdController)
 adminRoute.post("/signin", getAdminIdController);
-adminRoute.get("/:adminId", getAdminInfoController);
 adminRoute.get("/dashboard", getAdminDashboardController);
+adminRoute.get("/:adminId", getAdminInfoController);
 export default adminRoute;

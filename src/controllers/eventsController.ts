@@ -60,22 +60,23 @@ export const updateEventsController = catchAsync(
     const {
       title,
       description,
-      totalSeats,
-      ticketPrice,
-      eventDate,
-      coverPhoto,
+      total_seats,
+      ticket_price,
+      event_date,
+      cover_photo,
     } = req.body;
     const { eventId } = req.params;
 console.log(eventId);
 console.log(req.params)
+console.log("update Event data:",req.body)
     const response = await updateEvent(
       eventId,
       title,
       description,
-      totalSeats,
-      ticketPrice,
-      eventDate,
-      coverPhoto
+      total_seats,
+      ticket_price,
+      event_date,
+      cover_photo,
     );
 
     if (!response) {

@@ -50,7 +50,10 @@ export const postSingleUser = async (user: {
   console.log("dbresponse.rows:", dbresponse.rows);
 };
 
-export const getUserBookings = async (user_id: string) => {
+export const getUserBookings = async (userId: string) => {
+  const user_id=Number(userId);
+  console.log(user_id);
+  
   const dbresponse = await db(userQuery.userBookingsQuery, [user_id]);
   const userbooking = dbresponse.rows;
   if (!userbooking) {

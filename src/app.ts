@@ -11,6 +11,7 @@ import adminRoute from "./routes/adminRoute";
 import { uploadsDir } from "./filehandle/uploadsDir";
 import bookingRoute from "./routes/bookingRoute";
 import eventRoute from "./routes/eventsRoute";
+import contactRoute from "./routes/contactsRoute";
 // import { frontendConfig } from "./config/dotenv.config";
 
 dotenv.config();
@@ -31,9 +32,10 @@ app.use("/uploads", express.static(uploadsDir));
 // app.use("/api/events/", getAllEventRoute);
 // app.use("/api/", createEventRoute);
 
+app.use("/api/bookings/", bookingRoute);
 app.use("/api/events/", eventRoute);
 app.use("/api/user/", userRoute);
 app.use("/api/admin/", adminRoute);
-app.use("/api/bookings/", bookingRoute);
+app.use("/api/contacts/", contactRoute);
 
 export default app;

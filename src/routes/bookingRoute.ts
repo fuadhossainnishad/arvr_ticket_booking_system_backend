@@ -7,6 +7,6 @@ const bookingRoute=express.Router()
 
 bookingRoute.post('/',validateRequest(postBookingValidation),postBookingController)
 
-bookingRoute.get('/:bookingId',getBookingInfoController)
+bookingRoute.get('/:userId',getBookingInfoController)
 
 export default bookingRoute

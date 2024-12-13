@@ -38,6 +38,7 @@ export const getAdminInfo = async (id: string) => {
 export const adminDashboardInfo = async () => {
   const dbresponse = await db(adminDashboardQuery);
   const dashboard = dbresponse.rows;
+  // console.log("admin dbresponse:",dbresponse)
   console.log("adminDashboardInfo", dashboard)
   if (!dashboard) {
     return null;

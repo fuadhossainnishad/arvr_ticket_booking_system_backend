@@ -41,7 +41,7 @@ export const getAdminInfoController = catchAsync(
 export const getAdminDashboardController = catchAsync(
   async (req: Request, res: Response) => {
     const admindashboard = await adminDashboardInfo();
-    console.log(admindashboard)
+    console.log("admin dashboard:",admindashboard)
     if (!admindashboard) {
       res.status(404).json({ message: "Admin Dashboard not found" });
     }

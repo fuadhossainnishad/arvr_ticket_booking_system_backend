@@ -15,16 +15,16 @@ export const getAdminInfoQuery = `
 
 export const adminDashboardQuery = `
 WITH total_users AS (
-  SELECT COALESCE(COUNT(*), 0) AS total_users FROM users
+  SELECT COUNT(*) AS total_users FROM users
 ),
 total_events AS (
-  SELECT COALESCE(COUNT(*), 0) AS total_events FROM events
+  SELECT COUNT(*) AS total_events FROM events
 ),
 events_by_date AS (
   SELECT 
     event_date AS date, 
     ARRAY_AGG(title) AS event_names,
-    COALESCE(COUNT(*), 0) AS event_count
+    COUNT(*) AS event_count
   FROM events
   GROUP BY event_date
   ORDER BY event_date

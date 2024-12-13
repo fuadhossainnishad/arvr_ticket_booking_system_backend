@@ -10,7 +10,7 @@ const insertSingleUserQuery = `INSERT INTO users (fullname,email,mobileNumber,ha
 VALUES (?,?,?)
 `;
 
-export const userQuery = {
+export const userQueries = {
   getAllUserQuery,
   getSingleUserInfoQuery,
   getSingleUserIdQuery,

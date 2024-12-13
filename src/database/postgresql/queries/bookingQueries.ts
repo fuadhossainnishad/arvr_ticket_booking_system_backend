@@ -5,5 +5,5 @@ export const bookingQuery = `
 
 export const bookingInfoQuery = `
  SELECT * FROM user_bookings
-  WHERE id=$1;
+  WHERE user_id=$1;
 `;

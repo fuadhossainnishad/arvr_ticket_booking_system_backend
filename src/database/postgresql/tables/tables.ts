@@ -1,4 +1,4 @@
-export const pgCreateEventsTable=`CREATE TABLE events (
+export const pgCreateEventsTable = `CREATE TABLE events (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
@@ -9,7 +9,7 @@ export const pgCreateEventsTable=`CREATE TABLE events (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-`
+`;
 export const pgCreateAdminTableQuery = `
 CREATE TABLE admins (
     id SERIAL PRIMARY KEY,
@@ -42,5 +42,16 @@ CREATE TABLE IF NOT EXISTS users (
     hashPassword VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
+);
+`;
+
+export const pgContactsTableQuery = `
+    CREATE TABLE IF NOT EXISTS contacts(
+    contact_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    eamil VARCHAR(255) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
 );
 `;
