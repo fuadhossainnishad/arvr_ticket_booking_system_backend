@@ -18,14 +18,12 @@ const userQueries_1 = require("../database/postgresql/queries/userQueries");
 // import { User } from "../interface/userInterface";
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const getSingleUserId = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
-    const dbresponse = (yield (0, dbconfig_1.db)(userQueries_1.userQuery.getSingleUserIdQuery, [
-        email,
-    ]));
+    const dbresponse = yield (0, dbconfig_1.db)(userQueries_1.userQuery.getSingleUserIdQuery, [email]);
     if (!dbresponse.rows[0]) {
         return null;
     }
     const user = dbresponse.rows[0];
-    const checkPassword = yield bcrypt_1.default.compare(password, user.hashPassword);
+    const checkPassword = yield bcrypt_1.default.compare(password, user.hashpassword);
     if (!checkPassword) {
         return null;
     }
@@ -48,19 +46,21 @@ const getAllUsers = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getAllUsers = getAllUsers;
 const postSingleUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
-    const { fullName, email, mobilenumber, password } = user;
+    const { fullname, email, mobilenumber, password } = user;
     const hashPassword = yield bcrypt_1.default.hash(password, 10);
-    const dbresponse = (yield (0, dbconfig_1.db)(userQueries_1.userQuery.insertSingleUserQuery, [
-        fullName,
+    const dbresponse = yield (0, dbconfig_1.db)(userQueries_1.userQuery.insertSingleUserQuery, [
+        fullname,
         email,
         mobilenumber,
         hashPassword,
-    ]));
+    ]);
     return dbresponse.rows;
     console.log("dbresponse.rows:", dbresponse.rows);
 });
 exports.postSingleUser = postSingleUser;
-const getUserBookings = (user_id) => __awaiter(void 0, void 0, void 0, function* () {
+const getUserBookings = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const user_id = Number(userId);
+    console.log(user_id);
     const dbresponse = yield (0, dbconfig_1.db)(userQueries_1.userQuery.userBookingsQuery, [user_id]);
     const userbooking = dbresponse.rows;
     if (!userbooking) {

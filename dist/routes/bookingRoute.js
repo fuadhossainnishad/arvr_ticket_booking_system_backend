@@ -9,5 +9,5 @@ const bookingsValidation_1 = require("../validation/bookingsValidation");
 const bookingController_1 = require("../controllers/bookingController");
 const bookingRoute = express_1.default.Router();
 bookingRoute.post('/', (0, validateRequest_1.default)(bookingsValidation_1.postBookingValidation), bookingController_1.postBookingController);
-bookingRoute.get('/:bookingId', bookingController_1.getBookingInfoController);
+bookingRoute.get('/:userId', bookingController_1.getBookingInfoController);
 exports.default = bookingRoute;

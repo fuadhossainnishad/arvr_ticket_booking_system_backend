@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteEventValidationSchema = exports.getEventByIdValidationSchema = exports.createEventValidationSchema = void 0;
+exports.updateEventValidationSchema = exports.getEventByIdValidationSchema = exports.createEventValidationSchema = void 0;
 const zod_1 = require("zod");
 exports.createEventValidationSchema = zod_1.z.object({
     title: zod_1.z.string().min(1, "Title is required.").max(20, "Maximum 20 words"),
@@ -24,7 +24,11 @@ exports.getEventByIdValidationSchema = zod_1.z.object({
             .min(1, "Event id is required"),
     }),
 });
-exports.deleteEventValidationSchema = zod_1.z.object({
+// export const deleteEventValidationSchema=z.object({
+//   body:z.object({
+//   })
+// })
+exports.updateEventValidationSchema = zod_1.z.object({
     title: zod_1.z
         .string()
         .min(1, "Title is required.")

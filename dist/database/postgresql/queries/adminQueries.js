@@ -1,15 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.adminDashboardQuery = exports.getAdminInfoQuery = exports.getAdminIdQuery = void 0;
+exports.adminDashboardQuery = exports.getAdminInfoQuery = exports.getAllAdminIdQuery = exports.getAdminIdQuery = void 0;
 exports.getAdminIdQuery = `
-  SELECT id, hashPassword 
+  SELECT password 
   FROM admins
-  WHERE email = $1
+ WHERE LOWER(email) = LOWER(TRIM($1));
 `;
+exports.getAllAdminIdQuery = `SELECT * 
+  FROM admins;`;
 exports.getAdminInfoQuery = `
   SELECT * 
   FROM admins
-  WHERE id = $1
+  WHERE id = $1;
 `;
 exports.adminDashboardQuery = `
 WITH total_users AS (

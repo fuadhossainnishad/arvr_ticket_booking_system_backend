@@ -7,5 +7,5 @@ exports.bookingQuery = `
 `;
 exports.bookingInfoQuery = `
  SELECT * FROM user_bookings
-  WHERE id=$1;
+  WHERE user_id=$1;
 `;

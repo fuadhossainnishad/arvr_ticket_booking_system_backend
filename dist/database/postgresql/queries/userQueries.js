@@ -35,7 +35,7 @@ FROM
 JOIN 
     events e ON ub.event_id = e.id
 WHERE 
-    ub.user_id = $1; -- Replace $1 with the user's ID
+    ub.user_id = $1;
 `;
 exports.userQuery = {
     getAllUserQuery,

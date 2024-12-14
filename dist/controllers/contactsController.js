@@ -12,22 +12,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getBookingInfoController = exports.postBookingController = void 0;
-const bookingService_1 = require("../services/bookingService");
+exports.getContactController = exports.postContactController = void 0;
 const catchAsync_1 = __importDefault(require("../utils/catchAsync"));
-exports.postBookingController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { userId, eventId, seats } = req.body;
-    console.log(req.body);
-    const bookingId = yield (0, bookingService_1.postBookingService)(userId, eventId, seats);
-    return res.status(201).json({ message: "Booking successful", bookingId });
-}));
-exports.getBookingInfoController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const userId = req.params.userId;
-    console.log(req.params);
-    const bookingInfo = yield (0, bookingService_1.getBookingInfoService)(Number(userId));
-    console.log(userId);
-    if (!bookingInfo) {
-        return res.status(404).json({ message: "Booking info not found" });
+const contactsService_1 = require("../services/contactsService");
+exports.postContactController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, email, subject, message } = req.body;
+    const contact_id = yield (0, contactsService_1.postContactService)(name, email, subject, message);
+    if (!contact_id) {
+        return res.status(404).json({ message: "Message not sent" });
     }
-    return res.status(200).json(bookingInfo);
+    return res.status(200).json({ message: "Message sent to the authority", contact_id });
+}));
+exports.getContactController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const allContacts = yield (0, contactsService_1.getContactsService)();
+    if (!allContacts) {
+        return res.status(404).json({ message: "No contacts found" });
+    }
+    return res.status(200).json({ message: "All contacts", allContacts });
 }));

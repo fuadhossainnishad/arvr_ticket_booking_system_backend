@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userQuery = void 0;
+exports.userQueries = void 0;
 const getAllUserQuery = `SELECT * FROM users`;
 const getSingleUserIdQuery = `SELECT id,password FROM users
 WHERE email=?
@@ -10,7 +10,7 @@ WHERE id=?`;
 const insertSingleUserQuery = `INSERT INTO users (fullname,email,mobileNumber,hashPassword)
 VALUES (?,?,?)
 `;
-exports.userQuery = {
+exports.userQueries = {
     getAllUserQuery,
     getSingleUserInfoQuery,
     getSingleUserIdQuery,

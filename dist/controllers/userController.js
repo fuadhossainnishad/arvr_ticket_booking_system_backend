@@ -17,6 +17,7 @@ const userServices_1 = require("../services/userServices");
 const catchAsync_1 = __importDefault(require("../utils/catchAsync"));
 exports.getSingleUserIdController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
+    console.log(req.body);
     const userId = yield (0, userServices_1.getSingleUserId)(email, password);
     if (!userId) {
         return res.status(401).json({ message: "Invalid email or password" });
@@ -39,9 +40,10 @@ exports.getAllUsersController = (0, catchAsync_1.default)((req, res) => __awaite
     return res.status(200).json({ message: "All Users", allUsers });
 }));
 exports.postSingleUserController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { fullName, email, mobilenumber, password } = req.body;
+    const { fullname, email, mobilenumber, password } = req.body;
+    console.log(req.body);
     const postUser = yield (0, userServices_1.postSingleUser)({
-        fullName,
+        fullname,
         email,
         mobilenumber,
         password,

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pgCreateUserTableQuery = exports.pgCreateUserBookingTableQuery = exports.pgCreateAdminTableQuery = exports.pgCreateEventsTable = void 0;
+exports.pgContactsTableQuery = exports.pgCreateUserTableQuery = exports.pgCreateUserBookingTableQuery = exports.pgCreateAdminTableQuery = exports.pgCreateEventsTable = void 0;
 exports.pgCreateEventsTable = `CREATE TABLE events (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -43,5 +43,15 @@ CREATE TABLE IF NOT EXISTS users (
     hashPassword VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
+);
+`;
+exports.pgContactsTableQuery = `
+    CREATE TABLE IF NOT EXISTS contacts(
+    contact_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    eamil VARCHAR(255) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
 );
 `;

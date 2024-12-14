@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import {db} from './config/dbconfig';
+// import { Request, Response } from 'express';
+// import {db} from './config/dbconfig';
 import app from './app';
 
 

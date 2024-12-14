@@ -17,7 +17,9 @@ const adminService_1 = require("../services/adminService");
 const catchAsync_1 = __importDefault(require("../utils/catchAsync"));
 exports.getAdminIdController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
-    const adminPassword = (0, adminService_1.getAdminId)(email);
+    console.log(email, password);
+    const adminPassword = yield (0, adminService_1.getAdminId)(email);
+    console.log(adminPassword);
     if (!adminPassword) {
         return res.status(404).json({ message: "Admin not found" });
     }
@@ -30,6 +32,7 @@ exports.getAdminIdController = (0, catchAsync_1.default)((req, res) => __awaiter
 }));
 exports.getAdminInfoController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { adminId } = req.params;
+    console.log(req.params);
     const adminInfo = (0, adminService_1.getAdminInfo)(adminId);
     if (!adminInfo) {
         res.status(404).json({ message: "Admin not found" });
@@ -40,6 +43,7 @@ exports.getAdminInfoController = (0, catchAsync_1.default)((req, res) => __await
 }));
 exports.getAdminDashboardController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const admindashboard = yield (0, adminService_1.adminDashboardInfo)();
+    console.log("admin dashboard:", admindashboard);
     if (!admindashboard) {
         res.status(404).json({ message: "Admin Dashboard not found" });
     }

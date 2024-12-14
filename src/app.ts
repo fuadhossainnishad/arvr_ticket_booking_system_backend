@@ -24,7 +24,14 @@ const app = express();
 //   credentials: true,
 // }
 
-app.use(cors());
+app.use(
+    cors({
+      origin: process.env.FRONTENDURL!,
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      credentials: true,
+    })
+  );
+  
 app.use(express.json()); // Use built-in Express middleware
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(uploadsDir));

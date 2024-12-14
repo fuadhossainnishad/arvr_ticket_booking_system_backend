@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getBookingInfoService = exports.postBookingService = void 0;
 const dbconfig_1 = require("../config/dbconfig");
 const bookingQueries_1 = require("../database/postgresql/queries/bookingQueries");
+const userQueries_1 = require("../database/postgresql/queries/userQueries");
 const postBookingService = (userId, eventId, seats) => __awaiter(void 0, void 0, void 0, function* () {
     const dbresponse = yield (0, dbconfig_1.db)(bookingQueries_1.bookingQuery, [userId, eventId, seats]);
     const bookingId = dbresponse.rows;
@@ -22,8 +23,8 @@ const postBookingService = (userId, eventId, seats) => __awaiter(void 0, void 0,
     console.log("bookingId", bookingId);
 });
 exports.postBookingService = postBookingService;
-const getBookingInfoService = (bookingId) => __awaiter(void 0, void 0, void 0, function* () {
-    const dbresponse = yield (0, dbconfig_1.db)(bookingQueries_1.bookingInfoQuery, [bookingId]);
+const getBookingInfoService = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const dbresponse = yield (0, dbconfig_1.db)(userQueries_1.userQuery.userBookingsQuery, [userId]);
     const bookingInfo = dbresponse.rows;
     if (!bookingInfo) {
         return null;
