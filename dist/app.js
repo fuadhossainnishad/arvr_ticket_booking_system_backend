@@ -21,11 +21,11 @@ const app = (0, express_1.default)();
 //   credentials: true,
 // }
 app.use((0, cors_1.default)({
-    origin: process.env.FRONTENDURL,
+    origin: [process.env.FRONTENDURL, process.env.LOCALHOST],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 }));
-app.use(express_1.default.json()); // Use built-in Express middleware
+app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/uploads", express_1.default.static(uploadsDir_1.uploadsDir));
 // app.use("/api/events/", getAllEventRoute);

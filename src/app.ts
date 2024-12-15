@@ -23,16 +23,20 @@ const app = express();
 //   methods: '*' ,
 //   credentials: true,
 // }
-
+app.use((req, res, next) => {
+  console.log("Request Origin:", req.headers.origin);
+  next();
+});
 app.use(
-    cors({
-      origin: process.env.FRONTENDURL!,
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-      credentials: true,
-    })
-  );
-  
-app.use(express.json()); // Use built-in Express middleware
+  cors({
+    origin: process.env.FRONTENDURL!,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
+// app.options("*", cors());
+
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(uploadsDir));
 

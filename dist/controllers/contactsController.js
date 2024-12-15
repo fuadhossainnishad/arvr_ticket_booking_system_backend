@@ -21,7 +21,9 @@ exports.postContactController = (0, catchAsync_1.default)((req, res) => __awaite
     if (!contact_id) {
         return res.status(404).json({ message: "Message not sent" });
     }
-    return res.status(200).json({ message: "Message sent to the authority", contact_id });
+    return res
+        .status(200)
+        .json({ message: "Message sent to the authority", contact_id });
 }));
 exports.getContactController = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const allContacts = yield (0, contactsService_1.getContactsService)();

@@ -13,7 +13,12 @@ exports.getContactsService = exports.postContactService = void 0;
 const dbconfig_1 = require("../config/dbconfig");
 const contactsQueries_1 = require("../database/postgresql/queries/contactsQueries");
 const postContactService = (name, email, subject, message) => __awaiter(void 0, void 0, void 0, function* () {
-    const response = yield (0, dbconfig_1.db)(contactsQueries_1.insertContactsQuery, [name, email, subject, message]);
+    const response = yield (0, dbconfig_1.db)(contactsQueries_1.insertContactsQuery, [
+        name,
+        email,
+        subject,
+        message,
+    ]);
     if (!response) {
         return null;
     }
@@ -27,6 +32,7 @@ const getContactsService = () => __awaiter(void 0, void 0, void 0, function* () 
         return null;
     }
     const contacts = response.rows;
+    console.log(contacts);
     return contacts;
 });
 exports.getContactsService = getContactsService;
